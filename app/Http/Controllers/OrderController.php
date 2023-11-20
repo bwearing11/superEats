@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+
 
 class OrderController extends Controller
 {
@@ -12,9 +14,9 @@ class OrderController extends Controller
         $restaurantUser = User::findOrFail($id);
 
         // Get the orders for the restaurant
-        $orders = $restaurantUser->orders;
+        $orders = $restaurantUser->ordersReceived;
 
         // Return the view with orders data
-        return view('restaurantOrders', compact('restaurantUser', 'orders'));
+        return view('orderList', ['orders' => $orders]);
     }
 }

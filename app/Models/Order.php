@@ -24,6 +24,16 @@ class Order extends Model
     // Define a many-to-many relationship with the Dish model
     public function dishes()
     {
-        return $this->belongsToMany(Dish::class)->withTimestamps();
+        return $this->belongsToMany(Dish::class, 'order_dish')->withTimestamps();
+    }
+
+    public function calculateTotalPrice(){
+        $totalPrice = 0;
+
+        foreach($this->dishes as $dish){
+            $totalPrice += $dish->price;
+        }
+
+        return $totalPrice;
     }
 }

@@ -19,7 +19,7 @@ class OrderSeeder extends Seeder
 
             $orderId = DB::table('orders')->insertGetId([
                 'customer_id' => $customerId,
-                'restaurant_id' => DB::table('users')->where('user_type', 'restaurant')->inRandomOrder()->value('id'),
+                'restaurant_id' => 2,
                 'order_date' => $orderDate,
                 'created_at' => $orderDate,
                 'updated_at' => $orderDate,
