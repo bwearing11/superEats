@@ -16,38 +16,39 @@ class CartController extends Controller
             return redirect()->route('login');
         }
 
-        // Ensure the user has the correct user_type
+        //Get the logged in customer
         $user = auth()->user();
 
-        //This shouldn't happen but just in case
+        // This shouldn't happen but just in case
         if ($user->user_type !== 'customer') {
             return redirect()->back();
         }
 
-        //Current cart is the user's cart if we made it this far
-        $cart = $user->cart;
+        // Retrieve the restaurant id for the dish
+        $restaurantId = Dish::find($dishId)->user_id;
 
-        //Checks if the dish exists before adding it 
-        $dish = Dish::find($dishId);
-        if(!$dish){
-            return redirect()->back();
-        }
+        // Retrieve the cart for the current user and restaurant
+        $cart = Cart::where('customer_id', $user->id)
+                    ->where('restaurant_id', $restaurantId)
+                    ->with('dishes')
+                    ->first();
 
-        // Create a cart if it doesn't exist for the user
+        // Create a cart if it doesn't exist for the user and restaurant
         if (!$cart) {
-            $cart = Cart::create([
+            $cartData = [
                 'customer_id' => $user->id,
-                'restaurant_id' => $dish->user_id,
-            ]);
-        }
+                'restaurant_id' => $restaurantId,
+            ];
 
-        
+            $cart = Cart::create($cartData);
+        }
 
         // Add the dish to the cart
         $cart->dishes()->attach($dishId);
 
-        return redirect()->route('restaurants.show', ['id'=>$dish->user_id]);
+        return redirect()->route('restaurants.show', ['id' => $restaurantId]);
     }
+
 
 
 }

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 class DishController extends Controller
 {
+    //Finds the dish and returns the detail view
     public function show($id)
     {
         // Retrieve the dish based on the provided ID
@@ -16,12 +17,15 @@ class DishController extends Controller
         return view('dishDetail', compact('dish'));
     }
 
+
+    //Returns the add dish view
     public function create()
     {
         $restaurantUser = auth()->id();
         return view('addDish');
     }
 
+    //Takes the form request, validates it and stores the new dish
     public function store(Request $request)
     {
         // Validate the form data
@@ -40,6 +44,7 @@ class DishController extends Controller
         return redirect()->route('restaurants.show', ['id' => auth()->id()]);
     }
 
+    //Deletes a dish
     public function destroy($id)
     {
         // Find the dish by ID and delete it
@@ -50,12 +55,14 @@ class DishController extends Controller
         return redirect()->route('restaurants.show', ['id' => $dish->user_id]);
     }
 
+    //Returns edit dish view
     public function edit($id)
     {
         $dish = Dish::findOrFail($id);
         return view('editDish', ['dish' => $dish]);
     }
 
+    //Takes the form data and updates the dish
     public function update(Request $request, $id)
     {
         $dish = Dish::findOrFail($id);

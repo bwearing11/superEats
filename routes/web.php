@@ -50,6 +50,8 @@ Route::get('/orderList', function () {
 
 /*--------------------------------------------Cart Routes------------------------------------------------*/
 Route::post('/addToCart/{dish}', [CartController::class, 'addToCart'])->name('addToCart');
+Route::get('/emptyCart/{id}', [RestaurantDetailController::class, 'emptyCart'])->name('emptyCart');
+Route::get('/checkout/{id}', [RestaurantDetailController::class, 'checkout'])->name('checkoutCart');
 
 
 Route::get('/restaurants/{id}/orders', [OrderController::class, 'index'])->name('restaurant.orders');

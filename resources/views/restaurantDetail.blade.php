@@ -2,8 +2,6 @@
 
 @section('content')
 
-@dd($cart)
-
 <div class='container'>
 
     <div class='row mb-3'>&nbsp;</div>
@@ -36,10 +34,10 @@
                 <h5>Items in Cart:</h5>
             </div>
             <div class='row'>
-                <ul class='card shadow w-100' style="background-color: #FB9F89; color: white;">
+                <ul class='card shadow w-100 m-2 p-2' style="background-color: #FB9F89; color: white;">
                 @if($cart)
                     @foreach($cart->dishes as $dish)
-                        <li>{{$cartItem->name}}</li>
+                        <li>{{$dish->name}}</li>
                     @endforeach
                 @else
                         <p>Cart is empty.</p>
@@ -54,12 +52,16 @@
             
             <div class='col-6 text-center'>
             <div class='row'>
-                <a class='btn btn-secondary text-white m-3 p-2 text-center' style='background-color: #1E1E24;'><h5>Empty Cart ❌</h5></a>
+                <a href="{{ route('emptyCart', ['id' => $user->id]) }}" class='btn btn-secondary text-white m-3 p-2 text-center' style='background-color: #1E1E24;'><h5>Empty Cart ❌</h5></a>
             </div>
 
+            
             <div class='row'>
-                <a class='btn btn-primary m-3 p-2 text-white'><h5>Order Cart 🛒</h5></a>
+            @if($cart)
+                <a href="{{ route('checkoutCart', ['id' => $user->id]) }}" class='btn btn-primary m-3 p-2 text-white'><h5>Order Cart 🛒</h5></a>
+            @endif
             </div>
+            
 
             </div>
             @endif
@@ -68,6 +70,18 @@
     </div>
 
     <div class='row mb-1'>&nbsp;</div>
+
+    @if(session('success'))
+    <div class="alert alert-success mt-3">
+        {{ session('success') }}
+    </div>
+    @endif
+
+    @if(session('error'))
+    <div class="alert alert-danger mt-3">
+        {{ session('error') }}
+    </div>
+    @endif
 
     @if($user->user_type === 'restaurant')
     @foreach($user->dishes as $dish)
