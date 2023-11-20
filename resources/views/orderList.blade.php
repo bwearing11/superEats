@@ -7,7 +7,11 @@
         <div class='col-2'>
              <a href="{{ route('restaurants.show', ['id' => auth()->id()]) }}" class="btn btn-secondary m-2 p-2"><b><h6>< &nbsp; Back</h6></b></a>
         </div>
+        @if($orders)
         <div class='col-8 text-center'><h2><u>{{$orders[0]->restaurant->name}} Orders</u></h2></div>
+        @else
+        <div class='col-8 text-center'><h2><u>There is an issue with your orders.</u></h2></div>
+        @endif
         <div class='col-2'>&nbsp;</div>
     </div>
 

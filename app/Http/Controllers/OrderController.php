@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
+    //Gets the orderList view with all of the orders
     public function index($id)
     {
         // Retrieve the restaurant user

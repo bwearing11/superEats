@@ -15,23 +15,28 @@ class OrderSeeder extends Seeder
 
         foreach ($users as $customerId) {
             // Gets a date from the last 30 days
-            $orderDate = Carbon::now()->subDays(rand(1, 30));
 
-            $orderId = DB::table('orders')->insertGetId([
-                'customer_id' => $customerId,
-                'restaurant_id' => 2,
-                'order_date' => $orderDate,
-                'created_at' => $orderDate,
-                'updated_at' => $orderDate,
-            ]);
+            //Checks if the current user is a restaurant
+            $restaurantId = DB::table('users')->where('user_type', 'restaurant')->value('id');
+
+            //If there is a restaurant_id, make an order for it. This gets done once for each restaurant
+            if($restaurantId){
+                $orderId = DB::table('orders')->insertGetId([
+                    'customer_id' => $customerId,
+                    'restaurant_id' => $restaurantId,
+                    'order_date' => now(),
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+            }
 
             // Using this to set a number of dishes per order
             $numberOfDishes = rand(1, 1);
 
-            // Gets all of the dishes id's in a random order
-            $dishIds = DB::table('dishes')->inRandomOrder()->limit($numberOfDishes)->pluck('id');
+            // Gets all of the dishes id's
+            $dishIds = DB::table('dishes')->where('user_id', $restaurantId)->inRandomOrder()->limit($numberOfDishes)->pluck('id');
 
-            // Add the values to the table
+            // Loops through each of the dishids and adds them to the pivot table with the current orderID
             foreach ($dishIds as $dishId) {
                 DB::table('order_dish')->insert([
                     'order_id' => $orderId,
