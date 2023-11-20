@@ -36,13 +36,19 @@
             </div>
             <div class='row'>
                 <ul class='card shadow w-100' style="background-color: #FB9F89; color: white;">
-                    <li>Dish Name</li>
-                    <li>Dish Name</li>
-                    <li>Dish Name</li>
+                @if($cart)
+                    @foreach($cart->dishes as $dish)
+                        <li>{{$cartItem->name}}</li>
+                    @endforeach
+                @else
+                        <p>Cart is empty.</p>
+                @endif
                 </ul>
 
-                <h6><b>Total: $xx.xx</b></h6>
-            </div>
+                @if($cart)
+                <h6><b>Total: ${{$cart->calculateTotal()}}</b></h6>
+                @endif
+                </div>
             </div>
             
             <div class='col-6 text-center'>

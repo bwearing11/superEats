@@ -58,7 +58,13 @@
             <div class='col-8 text-center'>
                 <h2>{{$dish->name}}</h2>
             </div>
-            <div class='col-2'><a class="btn btn-primary m-2 p-2 text-white"><h6>Add to Cart</h6></a></div>
+            <div class='col-2'>
+                <form action="{{ route('addToCart', ['dish' => $dish->id]) }}" method="post">
+                    @csrf
+                    @method('POST')
+                    <button type="submit" class="btn btn-primary m-2 p-2"><h6>Add to Cart</h6></button>
+                </form>
+            </div>
         </div>
 
         <div class='row mt-2'>
@@ -84,7 +90,7 @@
         </div>
 
     @else
-        <!-- View for Customer User or Guest -->
+        <!-- View for Guest -->
         <div class='row mb-1'>&nbsp;</div>
 
         <div class='row'>

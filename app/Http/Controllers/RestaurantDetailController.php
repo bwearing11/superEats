@@ -10,6 +10,14 @@ class RestaurantDetailController extends Controller
     public function show($id)
     {
         $user = User::with('dishes')->findOrFail($id);
-        return view('restaurantDetail', compact('user'));
+
+        if ($user->user_type === 'customer') {
+            // Get the cart for the authenticated customer
+            $cart = Cart::where('user_id', auth()->id())->with('dishes')->first();
+        } else {
+            $cart = null;
+        }
+
+        return view('restaurantDetail', compact('user', 'cart'));
     }
 }

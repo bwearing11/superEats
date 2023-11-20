@@ -25,4 +25,9 @@ class Dish extends Model
     {
         return $this->belongsToMany(Order::class)->withTimestamps();
     }
+
+    public function carts()
+    {
+        return $this->belongsToMany(Cart::class)->withTimestamps();
+    }
 }

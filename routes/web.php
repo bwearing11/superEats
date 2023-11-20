@@ -4,6 +4,7 @@ use App\Http\Controllers\DishController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RestaurantController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\RestaurantDetailController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
@@ -49,6 +50,13 @@ Route::middleware('auth')->group(function () {
 Route::get('/orderList', function () {
     return view('orderList');
 });
+
+
+/*--------------------------------------------Cart Routes------------------------------------------------*/
+Route::middleware(['auth'])->group(function () {
+    Route::post('/add-to-cart/{dish}', [CartController::class, 'addToCart'])->name('addToCart');
+});
+
 
 Route::get('/restaurants/{id}/orders', [OrderController::class, 'index'])->name('restaurant.orders');
 require __DIR__ . '/auth.php';
