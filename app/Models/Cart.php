@@ -7,11 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Cart extends Model
 {
-    protected $fillable = ['user_id'];
+    protected $fillable = ['customer_id', 'restaurant_id'];
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'customer_id');
     }
 
     public function dishes()
@@ -22,15 +22,19 @@ class Cart extends Model
     public static function getUserCartItems($userId)
     {
         // Assuming there's a cart record associated with the user
-        $cart = self::where('user_id', $userId)->first();
+        $user = self::findOrFail($userId);
 
+        // Check if the user has a cart relationship
+        $cart = $user->cart;
+
+        //return the dishes from the cart
         if ($cart) {
-            $cartItems = $cart->dishes()->get();
-            return $cartItems;
+            return $cart->dishes;
         }
 
         return collect(); // Return an empty collection if no cart found
     }
+
 
     public function calculateTotal()
     {

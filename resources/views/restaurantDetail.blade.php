@@ -2,6 +2,7 @@
 
 @section('content')
 
+@dd($cart)
 
 <div class='container'>
 

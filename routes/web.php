@@ -35,10 +35,6 @@ Route::get('/restaurantDetail/{id}', [RestaurantDetailController::class, 'show']
 Route::get('/dashboard', [RestaurantController::class, 'index'])->name('restaurantList');
 Route::get('/restaurantList', [RestaurantController::class, 'index'])->name('restaurantList');
 
-Route::get('/restaurantDetails', function () {
-    return view('restaurantDetail');
-});
-
 /* -----------------------------------Profile Routes - not used------------------------------------------------ */
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -53,9 +49,7 @@ Route::get('/orderList', function () {
 
 
 /*--------------------------------------------Cart Routes------------------------------------------------*/
-Route::middleware(['auth'])->group(function () {
-    Route::post('/add-to-cart/{dish}', [CartController::class, 'addToCart'])->name('addToCart');
-});
+Route::post('/addToCart/{dish}', [CartController::class, 'addToCart'])->name('addToCart');
 
 
 Route::get('/restaurants/{id}/orders', [OrderController::class, 'index'])->name('restaurant.orders');
