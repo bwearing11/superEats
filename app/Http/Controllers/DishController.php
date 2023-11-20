@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Dish;
 use Illuminate\Http\Request;
+use Illuminate\Contracts\Validation\Rule;
+use App\Rules\UniqueWithinUser;
 
 class DishController extends Controller
 {
@@ -30,7 +32,12 @@ class DishController extends Controller
     {
         // Validate the form data
         $validatedData = $request->validate([
-            'name' => 'required|string|max:255|unique:dishes|min:3',
+            'name' => ['required',
+                        'string',
+                        'max:255',
+                        'min:3',
+                        new UniqueWithinUser('dishes', 'name', null, auth()->id()),
+        ],
             'description' => 'nullable|string',
             'price' => 'required|numeric|min:0',
         ]);
@@ -69,7 +76,7 @@ class DishController extends Controller
 
         // Validate the request data
         $validatedData = $request->validate([
-            'name' => 'required|string|max:255|unique:dishes|min:3',
+            'name' => 'required|string|max:255|min:3',
             'description' => 'nullable|string',
             'price' => 'required|numeric|min:0',
         ]);

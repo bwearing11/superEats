@@ -42,12 +42,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-/* --------------------------------------Orders Routes------------------------------------------------ */
-Route::get('/orderList', function () {
-    return view('orderList');
-});
-
-
 /*--------------------------------------------Cart Routes------------------------------------------------*/
 Route::post('/addToCart/{dish}', [CartController::class, 'addToCart'])->name('addToCart');
 Route::get('/emptyCart/{id}', [RestaurantDetailController::class, 'emptyCart'])->name('emptyCart');
