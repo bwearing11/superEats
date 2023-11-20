@@ -1,0 +1,13 @@
+ul.pagination {
+    background-color: #21A179;
+}
+
+ul.pagination li.page-item a.page-link {
+    color: #1e1e24;
+}
+
+ul.pagination li.page-item.active a.page-link {
+    background-color: #1e1e24;
+    border-color: #1e1e24;
+    color: #ffffff;
+}
