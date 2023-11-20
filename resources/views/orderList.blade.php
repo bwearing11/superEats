@@ -55,7 +55,8 @@
                         </div>
                     </div>
                 </div>
-                <div class='row mb-1'>&nbsp;</div>
+
+                <div class='row p-1 m-1'>&nbsp;</div>
             @endforeach
         @else
             <div class='col-1'>&nbsp;</div>

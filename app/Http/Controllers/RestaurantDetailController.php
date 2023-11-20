@@ -84,6 +84,15 @@ class RestaurantDetailController extends Controller
                 ->with('error', 'Cart not found.');
         }
 
+        // Get an array of dish names from the cart
+        $dishNames = $cart->dishes->pluck('name')->toArray();
+
+        // Combine dish names into a string, separated by commas
+        $dishNamesString = implode(', ', $dishNames);
+
+        // Calculate the total price of the purchased dishes
+        $totalPrice = $cart->dishes->sum('price');
+
         // Create an order based on the cart
         $order = new Order([
             'customer_id' => $user->id,
@@ -101,8 +110,12 @@ class RestaurantDetailController extends Controller
             $cart->delete();
         });
 
+        $customerAddress = $user->address;
+
+        $successMessage = "Order placed successfully. Thanks! \nDish(es) Ordered: $dishNamesString. \nTotal Price:  $totalPrice, \nDelivery Address: $customerAddress ";
+
         return redirect()->route('restaurants.show', ['id' => $restaurantId])
-            ->with('success', 'Order placed successfully. Cart emptied.');
+            ->with('success', $successMessage);
     }
 
 
