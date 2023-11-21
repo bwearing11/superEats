@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Dish;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Validation\Rule;
-use App\Rules\UniqueWithinUser;
 
 class DishController extends Controller
 {
@@ -36,7 +35,7 @@ class DishController extends Controller
                         'string',
                         'max:255',
                         'min:3',
-                        new UniqueWithinUser('dishes', 'name', null, auth()->id()),
+                        new \App\Rules\UniqueWithinRestaurant(auth()->id()),
         ],
             'description' => 'nullable|string',
             'price' => 'required|numeric|min:0',

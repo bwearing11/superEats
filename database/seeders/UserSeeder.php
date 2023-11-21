@@ -92,6 +92,13 @@ class UserSeeder extends Seeder
                 'user_type' => 'restaurant',
                 'password' => Hash::make('password'),
             ],
+            [
+                'name' => 'administrator',
+                'email' => 'admin@gmail.com',
+                'address' => 'admin',
+                'user_type' => 'administrator',
+                'password' => Hash::make('administrator'),
+            ],
         ];
 
         DB::table('users')->insert($testUsers);
