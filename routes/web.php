@@ -7,6 +7,7 @@ use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\RestaurantDetailController;
 use App\Http\Controllers\ApprovalsController;
+use App\Http\Controllers\PopularDishesController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
@@ -47,6 +48,7 @@ Route::get('/dish/{id}', [DishController::class, 'show'])->name('dish.detail');
 Route::get('/restaurantDetail/{id}', [RestaurantDetailController::class, 'show'])->name('restaurants.show');
 Route::get('/dashboard', [RestaurantController::class, 'index'])->name('restaurantList');
 Route::get('/restaurantList', [RestaurantController::class, 'index'])->name('restaurantList');
+Route::get('/popularDishes', [PopularDishesController::class, 'index'])->name('popularDishes');
 
 /* -----------------------------------Profile Routes - not used------------------------------------------------ */
 Route::middleware('auth')->group(function () {

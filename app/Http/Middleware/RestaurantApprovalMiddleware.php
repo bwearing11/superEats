@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 class RestaurantApprovalMiddleware
 {
     /**
-     * Handle an incoming request.
+     * Checks if the current restaurant is approved so that you can't add/remove dishes without approval.
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */

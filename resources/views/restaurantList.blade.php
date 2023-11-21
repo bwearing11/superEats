@@ -22,6 +22,10 @@
         <a href="{{route('approvals')}}" style="text-decoration: none; color: inherit;">
             <div class='btn btn-secondary m-2 p-2'><b><h6>Restaurant Approvals</h6></b></div>
         </a>
+        @else
+        <a href="{{route('popularDishes')}}" style="text-decoration: none; color: inherit;">
+            <div class='btn btn-secondary m-2 p-2'><b><h6>Popular Dishes</h6></b></div>
+        </a>
          @endif
 
         </div>
