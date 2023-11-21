@@ -23,6 +23,7 @@ class User extends Authenticatable
         'address',
         'user_type',
         'password',
+        'approved'
     ];
 
     public function dishes()

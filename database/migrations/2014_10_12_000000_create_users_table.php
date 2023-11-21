@@ -18,6 +18,7 @@ return new class extends Migration {
             $table->string('password');
             $table->string('address');
             $table->string('user_type');
+            $table->boolean('approved')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });

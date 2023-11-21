@@ -16,7 +16,15 @@
                 <h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>Restaurants Available on Super Eats</u></h2>
             </div>
         </div>
-        <div class='col-2'></div>
+        <div class='col-2'>
+
+         @if(auth()->check() && auth()->user()->user_type === 'administrator')
+        <a href="{{route('approvals')}}" style="text-decoration: none; color: inherit;">
+            <div class='btn btn-secondary m-2 p-2'><b><h6>Restaurant Approvals</h6></b></div>
+        </a>
+         @endif
+
+        </div>
     </div>
 
     <div class="row mb-1">&nbsp;&nbsp;</div>

@@ -102,5 +102,16 @@ class UserSeeder extends Seeder
         ];
 
         DB::table('users')->insert($testUsers);
+
+        //Approve everyone
+        \DB::table('users')
+            ->where('user_type', 'restaurant')
+            ->update(['approved' => true]);
+
+         //Unapprove Smoothie Haven
+        \DB::table('users')
+            ->where('name', 'Smoothie Haven')
+            ->update(['approved' => false]);
+
     }
 }
