@@ -71,7 +71,10 @@
                         </div>
                     </div>
                 </div>
+
                 <div class='col-1'></div>
+
+                <div class='row mb-4 p-2'>&nbsp;</div>
                 
 
                 @endforeach

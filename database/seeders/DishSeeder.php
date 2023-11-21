@@ -89,7 +89,7 @@ class DishSeeder extends Seeder
             'name' => 'Mango Tango Smoothie',
             'description' => 'Refreshing smoothie with mango and tropical fruits.',
             'price' => '5.99',
-            'user_id' => 6,
+            'user_id' => 11,
         ]);
 
     }

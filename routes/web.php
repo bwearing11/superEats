@@ -29,10 +29,14 @@ Route::get('/', [RestaurantController::class, 'index'])->name('restaurantList');
 
 Route::middleware(['auth', 'restaurant'])->group(function () {
     Route::get('/dishes/create', [DishController::class, 'create'])->name('dishes.create');
-    Route::put('/dishes', [DishController::class, 'store'])->name('dishes.store');
-    Route::delete('/dishes/{id}', [DishController::class, 'destroy'])->name('dishes.destroy');
     Route::get('/dishes/{id}/edit', [DishController::class, 'edit'])->name('dishes.editDish');
     Route::put('/dishes/{id}', [DishController::class, 'update'])->name('dishes.update');
+
+    //Check if they are approved before letting them add/delete
+    Route::middleware(['auth', 'restaurantApproval'])->group(function () {
+        Route::put('/dishes', [DishController::class, 'store'])->name('dishes.store');
+        Route::delete('/dishes/{id}', [DishController::class, 'destroy'])->name('dishes.destroy');
+    });
 });
 
 Route::get('/dish/{id}', [DishController::class, 'show'])->name('dish.detail');
