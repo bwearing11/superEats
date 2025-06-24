@@ -1,6 +1,6 @@
 # Super Eats 
 
-## (A delivery service site clone based on laravel and using blades with bootstrap)
+A delivery service site clone based on laravel and using blades with bootstrap
 
 
 ### What this project attempts to demonstrate:
